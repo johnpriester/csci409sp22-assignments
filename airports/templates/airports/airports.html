@@ -1,17 +1,13 @@
-def index(request):
-    airports = Airport.objects.all()
-    context = {'airports': airports}
-    return render(request, 'airports/index.html', context)
 <!-- Specify which template to extend -->
 {% extends 'base.html' %}
 
 <!-- Add content to the content block in the main template -->
 {% block content %}
 <!-- Q1. Inside the h1 tag display the airport_code- airport name -->
-<h1></h1>
+<h1>{{ airport.airport_code }} - {{ airport.name }}</h1>
 <!-- Display the airport address -->
 <h2>Address</h2>
-<p></p>
+<p>{{ airport.address }} {{ airport.city }}, {{ airport.state }} {{ airport.zipcode }}</p>
 <h2>Runways</h2>
 <table class="table table-striped">
     <thead>
@@ -24,8 +20,12 @@ def index(request):
     <tbody>
         <!-- Q3 Display the runway number along with designation L,C,R, etc. -->
         <!-- Runway length and width  in a table row-->
-        {% for runway in airport.runway_set.all %} <!-- this is a new type of object it will fetch all of the associated runways -->
-
+        {% for runway in airport.runway_set.all %}
+        <tr>
+            <td>{{ runway.runway_number }}{{ runway.runway_designation }}</td>
+            <td>{{ runway.length }}</td>
+            <td>{{ runway.width }}</td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>

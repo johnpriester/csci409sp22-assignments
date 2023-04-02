@@ -12,5 +12,6 @@ urlpatterns = [
     # example url /airports/MYR
     # notice the airport_code parameter in the url matches
     # the parameter in the airport_info function
-    path('/<str:confirmation_number>', views.ticket_search),
+    path('/<int:confirmation_number>', views.ticket_search),
+    path('/search/', views.search),
 ]
